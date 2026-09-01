@@ -2,7 +2,7 @@ import os
 import json
 import re
 
-# ── Configuration ──────────────────────────────────────────────────────────────
+# Configuration
 
 INPUT_FILE  = "../data/generated_instruction_response_pairs.jsonl"
 OUTPUT_FILE = "../data/final_sft_dataset.jsonl"
@@ -12,7 +12,7 @@ MAX_RESPONSE_CHARS    = 8000
 MIN_INSTRUCTION_WORDS = 4
 MIN_CODE_LINES        = 4
 
-# ── DSP Validation ─────────────────────────────────────────────────────────────
+# DSP Validation 
 
 DSP_KEYWORDS = [
     "filter", "oscillator", "reverb", "delay", "chorus", "flanger", "phaser",
@@ -43,7 +43,7 @@ TRUNCATION_MARKERS = [
     "hreshold", "}\n}\n", "} }\n", "}}\n",
 ]
 
-# ── Quality Check ──────────────────────────────────────────────────────────────
+# Quality Check
 
 def is_valid(pair: dict) -> tuple[bool, str]:
     instruction = pair.get("instruction", "").strip()
@@ -85,7 +85,7 @@ def is_valid(pair: dict) -> tuple[bool, str]:
 
     return True, ""
 
-# ── I/O Helpers ────────────────────────────────────────────────────────────────
+#  Helpers
 
 def load_jsonl(filepath: str) -> list[dict]:
     pairs = []
@@ -106,7 +106,7 @@ def save_jsonl(data: list[dict], filepath: str) -> None:
         for row in data:
             f.write(json.dumps(row) + "\n")
 
-# ── Pipeline Steps ─────────────────────────────────────────────────────────────
+# Pipeline Steps
 
 def deduplicate(pairs: list[dict]) -> list[dict]:
     seen       = set()
@@ -142,7 +142,7 @@ def quality_filter(pairs: list[dict]) -> list[dict]:
         print(f"    {count:3}x  {reason}")
     return passed
 
-# ── Entry Point ────────────────────────────────────────────────────────────────
+# Entry Point
 
 def main():
     print("Phase 4 — Quality Filtering & Deduplication\n")

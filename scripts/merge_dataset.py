@@ -1,13 +1,13 @@
 import os
 import json
 
-# ── Configuration ──────────────────────────────────────────────────────────────
+#  Configuration
 
 HANDCRAFTED_FILE = "../data/handcrafted_pairs.jsonl"
 EXTRACTED_FILE   = "../data/final_sft_dataset.jsonl"
 OUTPUT_FILE      = "../data/merged_sft_dataset.jsonl"
 
-# ── Helpers ────────────────────────────────────────────────────────────────────
+# Helpers 
 
 def load_jsonl(filepath: str) -> list[dict]:
     pairs = []
@@ -31,7 +31,7 @@ def save_jsonl(data: list[dict], filepath: str) -> None:
         for row in data:
             f.write(json.dumps(row) + "\n")
 
-# ── Entry Point ────────────────────────────────────────────────────────────────
+# Entry Point 
 
 def main():
     print("Merging handcrafted and extracted pairs...\n")

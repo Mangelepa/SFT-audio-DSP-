@@ -2,13 +2,13 @@ import os
 import json
 import re
 
-# ── Configuration ──────────────────────────────────────────────────────────────
+# Configuration
 
 INPUT_FILE   = "../data/extracted_dsp_functions.txt"
 OUTPUT_FILE  = "../data/generated_instruction_response_pairs.jsonl"
 MAX_SNIPPETS = 2000
 
-# ── Keyword → Instruction Mapping ─────────────────────────────────────────────
+# Keyword → Instruction Mapping 
 # More specific keywords come first — first match wins.
 
 KEYWORD_INSTRUCTIONS = [
@@ -79,7 +79,7 @@ KEYWORD_INSTRUCTIONS = [
 
 FALLBACK_INSTRUCTION = "Explain this C++ DSP function and how it works."
 
-# ── Helpers ────────────────────────────────────────────────────────────────────
+# Helpers 
 
 def get_instruction(code: str) -> str:
     """Matches keywords against function names first, then full code."""
@@ -141,7 +141,7 @@ def save_jsonl(data: list[dict], filepath: str) -> None:
         for row in data:
             f.write(json.dumps(row) + "\n")
 
-# ── Entry Point ────────────────────────────────────────────────────────────────
+# Entry Point
 
 def main():
     print("Phase 3 — Instruction-Response Pair Generation\n")

@@ -2,7 +2,7 @@ import os
 import subprocess
 import re
 
-# ── Configuration ──────────────────────────────────────────────────────────────
+#Configuration 
 
 REPOS = {
     "Surge":      "https://github.com/surge-synthesizer/surge.git",
@@ -26,7 +26,7 @@ REPO_FOLDER  = "../src/repos"
 OUTPUT_FILE  = "../data/extracted_dsp_functions.txt"
 MAX_SNIPPETS = 20000
 
-# ── DSP Relevance ──────────────────────────────────────────────────────────────
+# DSP Relevance
 
 # Snippet must contain at least one of these to be kept
 DSP_KEYWORDS = [
@@ -58,7 +58,7 @@ SKIP_DIRS = {
     "thirdparty", "third_party", "extern", "external",
 }
 
-# ── Extraction Pattern ─────────────────────────────────────────────────────────
+# Extraction Pattern 
 
 FUNC_PATTERN = re.compile(
     r"(void|float|double|int|bool|auto)\s+"   # return type
@@ -68,7 +68,7 @@ FUNC_PATTERN = re.compile(
     re.MULTILINE
 )
 
-# ── Helpers ────────────────────────────────────────────────────────────────────
+# Helpers 
 
 def extract_function_body(text: str, match_start: int) -> str | None:
     """
@@ -181,7 +181,7 @@ def save_snippets(snippets: list[str], filepath: str):
         for snippet in snippets:
             f.write(snippet + "\n---\n")
 
-# ── Entry Point ────────────────────────────────────────────────────────────────
+# Entry Point 
 
 def main():
     print("Phase 2 — DSP Function Extraction\n")
